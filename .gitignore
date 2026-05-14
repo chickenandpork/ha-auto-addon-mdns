@@ -1,0 +1,22 @@
+# Go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Bazel
+bazel-out/
+bazel-bin/
+bazel-genfiles/
+bazel-ha-addon-auto-mdns/
+*.zip
+
+# Dependencies
+vendor/
+
+# OS
+.DS_Store
+bazel-*
