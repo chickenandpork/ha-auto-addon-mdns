@@ -1,4 +1,4 @@
-load("@rules_go//go:def.bzl", "go_library")
+load("@rules_go//go:def.bzl", "go_library", "go_test")
 
 go_library(
     name = "ha",
@@ -8,4 +8,14 @@ go_library(
     ],
     importpath = "ha-addon-auto-mdns/ha",
     visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "ha_test",
+    srcs = [
+        "client.go",
+        "model.go",
+        "model_test.go",
+    ],
+    importpath = "ha-addon-auto-mdns/ha",
 )

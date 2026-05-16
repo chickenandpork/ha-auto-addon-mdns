@@ -1,7 +1,2 @@
-# Caching
-build --distdir=~/.cache/distdir
-build --repository_cache=~/.cache/bazel-repo-cache
-build --disk_cache=~/.cache/bazel-disk-cache
-
 # Bazelmod
 common --enable_bzlmod=true
