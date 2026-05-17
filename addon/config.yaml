@@ -2,7 +2,7 @@ name: "HA Add-on Auto-mDNS"
 version: "0.1.0"
 slug: "ha-addon-auto-mdns"
 description: "Automatically discover Home Assistant addons and advertise their ingress via mDNS"
-url: "https://github.com/your-username/ha-addon-auto-mdns"
+url: "https://github.com/chickenandpork/ha-addon-auto-mdns"
 arch:
   - aarch64
   - amd64
