@@ -17,7 +17,6 @@
 - don't use WORKSPACE files; use the MODULE.bazel and BUILD.bazel files
 - if there's a missing go.sum value, use "bazel run @rules_go//go -- mod tidy"
 - don't use "io_bazel_rules_go" or "bazel_gazelle" as resource names; use the standard BCR values "rules_go" and "gazelle"
-- "bazel" is always run via "/usr/local/bin/subazel"
 - add to, or edit, but don't delete, .bazelrc and .bazelversion
 - do not edit files in /Users/allanc/Library/Caches/ as long-term fixes, but only to explore patches for downloaded dependencies
   - these files are ephemeral, and will be destroyed on rebuilds
