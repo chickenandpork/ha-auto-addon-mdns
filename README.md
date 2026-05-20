@@ -1,17 +1,12 @@
 # HA Add-on for Automatic mDNS
 
-This project builds an add-on for Home Assistant that:
-
-- Creates a reverse-proxy
-- Monitors add-ons, connects to their published endpoints via reverse proxy, and advertises an alias to the reverse proxy itself as that addon's name
-
 ## Build
 
 ```bash
 # Using Docker
 docker build -t ha-addon-auto-mdns:latest -f addon/Dockerfile .
 
-# Using Bazel
+# Using Bazel during testing
 bazel build //cmd/auto-mdns:auto-mdns
 ```
 
