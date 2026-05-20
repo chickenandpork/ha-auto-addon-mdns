@@ -1,0 +1,11 @@
+load("@rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "ha",
+    srcs = [
+        "client.go",
+        "model.go",
+    ],
+    importpath = "ha-addon-auto-mdns/ha",
+    visibility = ["//visibility:public"],
+)

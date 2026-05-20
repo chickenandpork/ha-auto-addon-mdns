@@ -1,0 +1,9 @@
+load("@rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "proxy",
+    srcs = ["manager.go"],
+    importpath = "ha-addon-auto-mdns/proxy",
+    visibility = ["//visibility:public"],
+    deps = ["//ha"],
+)

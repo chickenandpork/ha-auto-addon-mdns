@@ -1,0 +1,9 @@
+load("@rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "mdns",
+    srcs = ["advertiser.go"],
+    importpath = "ha-addon-auto-mdns/mdns",
+    visibility = ["//visibility:public"],
+    deps = ["//gomdns:gomdns"],
+)

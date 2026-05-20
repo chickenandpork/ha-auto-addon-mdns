@@ -1,0 +1,38 @@
+name: "HA Add-on Auto-mDNS"
+version: "0.1.0"
+slug: "ha-addon-auto-mdns"
+description: "Automatically discover Home Assistant addons and advertise their ingress via mDNS"
+url: "https://github.com/your-username/ha-addon-auto-mdns"
+arch:
+  - aarch64
+  - amd64
+  - armhf
+  - armv7
+
+init: false
+hassio_api: true
+supervisor_api: true
+host_network: true
+host_dbus: true
+privileged:
+  - SYS_ADMIN
+
+options:
+  listen_address: ":80"
+  https_listen_address: ":443"
+  poll_interval: "30s"
+  local_hostname: "auto-mdns"
+
+schema:
+  listen_address: "port(1-65535)"
+  https_listen_address: "port(1-65535)"
+  poll_interval: "10s|30s|60s|120s|300s"
+  local_hostname: "str"
+
+ports_description:
+  80: "HTTP proxy port for addon services"
+  443: "HTTPS proxy port for addon services"
+
+ingress: false
+panel_icon: "dns"
+panel_title: "Auto-mDNS"

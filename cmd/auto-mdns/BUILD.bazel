@@ -1,0 +1,19 @@
+load("@rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "auto-mdns_lib",
+    srcs = ["main.go"],
+    importpath = "ha-addon-auto-mdns/cmd/auto-mdns",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//ha",
+        "//mdns",
+        "//proxy",
+    ],
+)
+
+go_binary(
+    name = "auto-mdns",
+    embed = [":auto-mdns_lib"],
+    visibility = ["//visibility:public"],
+)
