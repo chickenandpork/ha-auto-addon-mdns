@@ -1,6 +1,14 @@
 FROM golang:1.24-bookworm AS builder
+
+# Docker Buildx sets these automatically for multi-platform builds
 ARG TARGETARCH
+ARG TARGETVARIANT
+
 ENV GOARCH=$TARGETARCH
+RUN case "$TARGETARCH" in \
+        arm)  export GOARM=$(echo $TARGETVARIANT | tr -d 'v') ;; \
+        amd64) export GOAMD64=auto ;; \
+    esac
 
 # Install Bazelisk
 RUN apt-get update && \
@@ -12,19 +20,19 @@ RUN apt-get update && \
 COPY . /src
 WORKDIR /src
 
-# Build the binary
-RUN pwd && ls -al && bazel build //cmd/auto-mdns:auto-mdns && \
+# Build the binary (cross-compiled via GOARCH)
+RUN bazel build //cmd/auto-mdns:auto-mdns && \
     cp bazel-bin/cmd/auto-mdns/auto-mdns_/auto-mdns /usr/local/bin/auto-mdns
-    # cp $(bazel cquery --output=files //cmd/auto-mdns:auto-mdns 2>/dev/null) /usr/local/bin/auto-mdns
 
 FROM debian:bookworm-slim
 RUN apt-get update && \
     apt-get install -y --no-install-recommends ca-certificates curl jq && \
     rm -rf /var/lib/apt/lists/*
 
-COPY --from=builder /usr/local/bin/auto-mdns /usr/local/bin/auto-mdns
 COPY addon/start.sh /usr/local/bin/start.sh
 RUN chmod +x /usr/local/bin/start.sh
+
+COPY --from=builder /usr/local/bin/auto-mdns /usr/local/bin/auto-mdns
 
 ENV SUPERVISOR_URL=http://supervisor
 ENV POLL_INTERVAL=30s
