@@ -3,7 +3,7 @@ name: Publish Add-on to GHCR
 on:
   push:
     branches:
-      - main
+      - master
 
 permissions:
   contents: read
