@@ -13,8 +13,9 @@ COPY . /src
 WORKDIR /src
 
 # Build the binary
-RUN bazel build //cmd/auto-mdns:auto-mdns && \
+RUN pwd && ls -al && bazel build //cmd/auto-mdns:auto-mdns && \
     cp bazel-bin/cmd/auto-mdns/auto-mdns_/auto-mdns /usr/local/bin/auto-mdns
+    # cp $(bazel cquery --output=files //cmd/auto-mdns:auto-mdns 2>/dev/null) /usr/local/bin/auto-mdns
 
 FROM debian:bookworm-slim
 RUN apt-get update && \
@@ -22,7 +23,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /usr/local/bin/auto-mdns /usr/local/bin/auto-mdns
-COPY start.sh /usr/local/bin/start.sh
+COPY addon/start.sh /usr/local/bin/start.sh
 RUN chmod +x /usr/local/bin/start.sh
 
 ENV SUPERVISOR_URL=http://supervisor
